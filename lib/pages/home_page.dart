@@ -1,5 +1,6 @@
 import 'package:coffeeui/pages/coffee_tiles.dart';
 import 'package:coffeeui/pages/coffee_type.dart';
+import 'package:coffeeui/pages/specials_tiles.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -11,6 +12,41 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  //list of coffee
+  final List coffeeType = [
+    //[coffeeType] [selected]
+    [
+      'Cappuccino',
+      true,
+    ],
+    [
+      'Expresso',
+      false,
+    ],
+    [
+      'Latte',
+      false,
+    ],
+    [
+      'Americano',
+      false,
+    ],
+    [
+      'Black Coffee',
+      false,
+    ],
+  ];
+
+  //selected coffee type method
+  void coffeeTypeSelected(int index) {
+    setState(() {
+      for(int i = 0; i<coffeeType.length; i++){
+        coffeeType[i][1] = false;
+      }
+      coffeeType[index][1] = true;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,6 +86,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -64,7 +101,7 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(
               height: 20,
             ),
-        
+
             //search bar
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -83,15 +120,18 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(height: 20),
             Container(
               height: 50,
-              child: ListView(
+              child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                children: [
-                  CoffeeType(coffeeType: 'Cappuccino'),
-                  CoffeeType(coffeeType: 'Expresso'),
-                  CoffeeType(coffeeType: 'Latte'),
-                  CoffeeType(coffeeType: 'Americano'),
-                  CoffeeType(coffeeType: 'Black Coffee'),
-                ],
+                itemCount: coffeeType.length,
+                itemBuilder: (context, index) {
+                  return CoffeeType(
+                    coffeeType: coffeeType[index][0], 
+                    isSelected: coffeeType[index][1], 
+                    onTap: (){
+                      coffeeTypeSelected(index);
+                    },
+                  );
+                },
               ),
             ),
             Container(
@@ -100,12 +140,78 @@ class _HomePageState extends State<HomePage> {
                 scrollDirection: Axis.horizontal,
                 children: [
                   CoffeeTile(
-                    coffeeImagePath: 'lib/images/coffee6.jpg',
-                    coffeeType: 'Latte',
+                    coffeeImagePath: 'lib/images/coffee10.jpeg',
+                    coffeeType: 'Cappuccino',
+                    milkType: 'With Almond Milk',
+                    coffeePrice: '\$ 4.45',
                   ),
-                  //CoffeeTile(),
-                  //CoffeeTile(),
+                  CoffeeTile(
+                    coffeeImagePath: 'lib/images/coffee9.jpg',
+                    coffeeType: 'Black Coffee',
+                    milkType: '',
+                    coffeePrice: '\$ 3.00',
+                  ),
+                  CoffeeTile(
+                    coffeeImagePath: 'lib/images/coffee6.jpg',
+                    coffeeType: 'Black Coffee',
+                    milkType: '',
+                    coffeePrice: '\$ 3.00',
+                  ),
+                  CoffeeTile(
+                    coffeeImagePath: 'lib/images/coffee5.jpg',
+                    coffeeType: 'Cappuccino',
+                    milkType: 'With Dairy Milk',
+                    coffeePrice: '\$ 4.95',
+                  ),
+                  CoffeeTile(
+                    coffeeImagePath: 'lib/images/coffee14.jpeg',
+                    coffeeType: 'Expresso',
+                    milkType: '',
+                    coffeePrice: '\$ 3.95',
+                  ),
+                  CoffeeTile(
+                    coffeeImagePath: 'lib/images/coffee12.jpeg',
+                    coffeeType: 'Americano',
+                    milkType: '',
+                    coffeePrice: '\$ 4.50',
+                  ),
+                  CoffeeTile(
+                    coffeeImagePath: 'lib/images/coffee4.jpg',
+                    coffeeType: 'Latte',
+                    milkType: 'With Almond Milk',
+                    coffeePrice: '\$ 4.00',
+                  ),
                 ],
+              ),
+            ),
+            const SizedBox(height: 20),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Text(
+                'Specials for you',
+                style: TextStyle(
+                  fontSize: 20,
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Container(
+                height: 330,
+                color: Colors.transparent,
+                child: ListView(
+                  children: [
+                    SpecialsTile(
+                      imgPath: 'lib/images/coffee7.jpg',
+                      specialsText: '5 Coffee Beans You should Try',
+                    ),
+                    SpecialsTile(
+                      imgPath: 'lib/images/coffee1.jpg',
+                      specialsText: '5 Facts About Coffee You Did\'nt Know',
+                    ),
+                  ],
+                ),
               ),
             ),
           ],

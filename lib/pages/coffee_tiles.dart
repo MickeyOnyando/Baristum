@@ -3,10 +3,14 @@ import 'package:flutter/material.dart';
 class CoffeeTile extends StatelessWidget {
   final String coffeeImagePath;
   final String coffeeType;
+  final String coffeePrice;
+  final String milkType;
 
   CoffeeTile({
     required this.coffeeImagePath,
     required this.coffeeType,
+    required this.coffeePrice,
+    required this.milkType,
   });
 
   @override
@@ -24,25 +28,42 @@ class CoffeeTile extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                height: 125,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  image: DecorationImage(
-                    image: AssetImage(coffeeImagePath),
-                    fit: BoxFit.cover,
+              Stack(
+                alignment: Alignment.topRight,
+                children: [
+                  Container(
+                    height: 125,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      image: DecorationImage(
+                        image: AssetImage(coffeeImagePath),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
-                ),
+                  Container(
+                    width: 45,
+                    height: 20,
+                    decoration: BoxDecoration(
+                      color: Colors.black.withOpacity(0.6),
+                      borderRadius: const BorderRadius.only(
+                        topRight: Radius.circular(16),
+                        bottomLeft: Radius.circular(16),
+                      ),
+                    ),
+                    child: const Center(child: Text('4.5')),
+                  ),
+                ],
               ),
               Padding(
-                padding: EdgeInsets.only(top: 8, bottom: 4),
+                padding: const EdgeInsets.only(top: 8, bottom: 4),
                 child: Text(
                   coffeeType,
-                  style: TextStyle(fontSize: 18),
+                  style: const TextStyle(fontSize: 18),
                 ),
               ),
-              const Text(
-                'With Almond Milk',
+              Text(
+                milkType,
                 style: TextStyle(color: Colors.grey),
               ),
               Padding(
@@ -50,7 +71,7 @@ class CoffeeTile extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('\$ 4.20'),
+                    Text(coffeePrice),
                     Container(
                       height: 30,
                       width: 30,
