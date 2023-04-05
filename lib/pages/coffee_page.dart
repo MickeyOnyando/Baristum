@@ -8,45 +8,34 @@ class CoffeePage extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Stack(
+          alignment: Alignment.bottomCenter,
           children: [
             Container(
               height: 400,
-              color: Colors.grey,
-              child: const Image(
-                image: AssetImage('lib/images/coffee10.jpeg'),
-                fit: BoxFit.cover,
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(40),
+                  bottomRight: Radius.circular(40),
+                ),
+                image: DecorationImage(
+                  image: AssetImage('lib/images/coffee9.jpg'),
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 30, left: 15, right: 15),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  ActionWidget(),
-                  ActionWidget(),
-                ],
+            Container(
+              height: 150,
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.only(
+                  bottomLeft: Radius.circular(40),
+                  bottomRight: Radius.circular(40),
+                ),
+                color: Colors.black.withOpacity(0.6),
               ),
+              child: const Text("hello"),
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class ActionWidget extends StatelessWidget {
-  const ActionWidget({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 35,
-      width: 35,
-      decoration: BoxDecoration(
-        color: Colors.grey[900],
-        borderRadius: BorderRadius.circular(9),
       ),
     );
   }
