@@ -1,8 +1,13 @@
+import 'package:coffeeui/components/bottom_nav_bar.dart';
 import 'package:coffeeui/pages/coffee_tiles.dart';
 import 'package:coffeeui/pages/coffee_type.dart';
 import 'package:coffeeui/pages/specials_tiles.dart';
+import 'package:coffeeui/pages/tiles/cappuccino_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'cart_page.dart';
+import 'shop_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -40,12 +45,28 @@ class _HomePageState extends State<HomePage> {
   //selected coffee type method
   void coffeeTypeSelected(int index) {
     setState(() {
-      for(int i = 0; i<coffeeType.length; i++){
+      for (int i = 0; i < coffeeType.length; i++) {
         coffeeType[i][1] = false;
       }
       coffeeType[index][1] = true;
     });
   }
+
+  int _selectedIndex = 0;
+  void navigateBottomBar(int newIndex) {
+    setState(() {
+      _selectedIndex = newIndex;
+    });
+  }
+
+  //list of pages
+  final List<Widget> _pages = [
+    //shop page
+    const ShopPage(),
+
+    //cart page
+    const CartPage(),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -62,28 +83,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.grey[900],
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.shop),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.notifications),
-            label: '',
-          ),
-        ],
-      ),
+      bottomNavigationBar: const MyBottomNavBar(),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -118,23 +118,23 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             const SizedBox(height: 20),
-            Container(
+            SizedBox(
               height: 50,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: coffeeType.length,
                 itemBuilder: (context, index) {
                   return CoffeeType(
-                    coffeeType: coffeeType[index][0], 
-                    isSelected: coffeeType[index][1], 
-                    onTap: (){
+                    coffeeType: coffeeType[index][0],
+                    isSelected: coffeeType[index][1],
+                    onTap: () {
                       coffeeTypeSelected(index);
                     },
                   );
                 },
               ),
             ),
-            Container(
+            SizedBox(
               height: 235,
               child: ListView(
                 scrollDirection: Axis.horizontal,
@@ -145,6 +145,14 @@ class _HomePageState extends State<HomePage> {
                     milkType: 'With Almond Milk',
                     coffeePrice: '\$ 4.45',
                     coffeeRating: '4.0',
+                    onTap: (() {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const CappuccinoPage(),
+                        ),
+                      );
+                    }),
                   ),
                   CoffeeTile(
                     coffeeImagePath: 'lib/images/coffee9.jpg',
@@ -152,6 +160,14 @@ class _HomePageState extends State<HomePage> {
                     milkType: '',
                     coffeePrice: '\$ 3.00',
                     coffeeRating: '4.3',
+                    onTap: (() {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const CappuccinoPage(),
+                        ),
+                      );
+                    }),
                   ),
                   CoffeeTile(
                     coffeeImagePath: 'lib/images/coffee6.jpg',
@@ -159,6 +175,14 @@ class _HomePageState extends State<HomePage> {
                     milkType: '',
                     coffeePrice: '\$ 3.00',
                     coffeeRating: '4.0',
+                    onTap: (() {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const CappuccinoPage(),
+                        ),
+                      );
+                    }),
                   ),
                   CoffeeTile(
                     coffeeImagePath: 'lib/images/coffee5.jpg',
@@ -166,6 +190,14 @@ class _HomePageState extends State<HomePage> {
                     milkType: 'With Dairy Milk',
                     coffeePrice: '\$ 4.95',
                     coffeeRating: '4.1',
+                    onTap: (() {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const CappuccinoPage(),
+                        ),
+                      );
+                    }),
                   ),
                   CoffeeTile(
                     coffeeImagePath: 'lib/images/coffee14.jpeg',
@@ -173,6 +205,14 @@ class _HomePageState extends State<HomePage> {
                     milkType: '',
                     coffeePrice: '\$ 3.95',
                     coffeeRating: '4.0',
+                    onTap: (() {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const CappuccinoPage(),
+                        ),
+                      );
+                    }),
                   ),
                   CoffeeTile(
                     coffeeImagePath: 'lib/images/coffee12.jpeg',
@@ -180,6 +220,14 @@ class _HomePageState extends State<HomePage> {
                     milkType: '',
                     coffeePrice: '\$ 4.50',
                     coffeeRating: '4.5',
+                    onTap: (() {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const CappuccinoPage(),
+                        ),
+                      );
+                    }),
                   ),
                   CoffeeTile(
                     coffeeImagePath: 'lib/images/coffee4.jpg',
@@ -187,6 +235,14 @@ class _HomePageState extends State<HomePage> {
                     milkType: 'With Almond Milk',
                     coffeePrice: '\$ 4.00',
                     coffeeRating: '4.0',
+                    onTap: (() {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const CappuccinoPage(),
+                        ),
+                      );
+                    }),
                   ),
                 ],
               ),

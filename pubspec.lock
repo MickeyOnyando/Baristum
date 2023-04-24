@@ -85,20 +85,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.5"
-  dependencies:
-    dependency: "direct main"
-    description:
-      name: dependencies
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.5"
-  disposables:
-    dependency: transitive
-    description:
-      name: disposables
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.2"
   fake_async:
     dependency: transitive
     description:
@@ -158,6 +144,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.3"
+  google_nav_bar:
+    dependency: "direct main"
+    description:
+      name: google_nav_bar
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "5.0.6"
   http:
     dependency: transitive
     description:
@@ -221,6 +214,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.0"
+  nested:
+    dependency: transitive
+    description:
+      name: nested
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0"
   path:
     dependency: transitive
     description:
@@ -305,13 +305,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.2.4"
-  quiver:
-    dependency: transitive
+  provider:
+    dependency: "direct main"
     description:
-      name: quiver
+      name: provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.5"
+    version: "6.0.5"
   sky_engine:
     dependency: transitive
     description: flutter

@@ -1,15 +1,16 @@
-import 'package:coffeeui/pages/coffee_page.dart';
 import 'package:flutter/material.dart';
 
 class CoffeeTile extends StatelessWidget {
+  final VoidCallback onTap;
   final String coffeeImagePath;
   final String coffeeType;
   final String coffeePrice;
   final String milkType;
   final String coffeeRating;
 
-  CoffeeTile({
+  const CoffeeTile({
     required this.coffeeImagePath,
+    required this.onTap,
     required this.coffeeType,
     required this.coffeePrice,
     required this.milkType,
@@ -21,11 +22,7 @@ class CoffeeTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 20),
       child: GestureDetector(
-        onTap:() {
-          Navigator.push(context, 
-            MaterialPageRoute(builder: (context)=> const CoffeePage()),
-          );
-        },
+        onTap: onTap,
         child: Container(
           width: 175,
           decoration: BoxDecoration(
@@ -83,7 +80,7 @@ class CoffeeTile extends StatelessWidget {
                 ),
                 Text(
                   milkType,
-                  style: TextStyle(color: Colors.grey),
+                  style: const TextStyle(color: Colors.grey),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 8),
