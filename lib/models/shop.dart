@@ -15,7 +15,7 @@ class CoffeeShop extends ChangeNotifier {
 
     //expresso
     Drink(
-      coffeeImagePath: "lib/images/coffee5.jpg",
+      coffeeImagePath: "lib/images/coffee12.jpg",
       coffeeType: "Expresso",
       coffeePrice: "\$ 3.99",
       milkType: "Dairy Milk",
@@ -36,6 +36,51 @@ class CoffeeShop extends ChangeNotifier {
       coffeeImagePath: "lib/images/coffee14.jpeg",
       coffeeType: "Americano",
       coffeePrice: "\$ 4.00",
+      milkType: " ",
+      coffeeRating: "4.0",
+    ),
+
+    //black coffee
+    Drink(
+      coffeeImagePath: "lib/images/coffee9.jpg",
+      coffeeType: "Black Coffee",
+      coffeePrice: "\$ 4.30",
+      milkType: " ",
+      coffeeRating: "4.0",
+    ),
+
+    //cappuccino
+    Drink(
+      coffeeImagePath: 'lib/images/coffee3.jpg',
+      coffeeType: "Cappuccino",
+      coffeePrice: '\$ 4.50',
+      milkType: "Almond Milk",
+      coffeeRating: "4.5",
+    ),
+
+    //latte
+    Drink(
+      coffeeImagePath: "lib/images/coffee10.jpeg",
+      coffeeType: "Latte",
+      coffeePrice: "\$ 4.30",
+      milkType: "Almond Milk",
+      coffeeRating: "4.5",
+    ),
+
+    //Americano
+    Drink(
+      coffeeImagePath: "lib/images/coffee8.jpg",
+      coffeeType: "Americano",
+      coffeePrice: "\$ 4.00",
+      milkType: " ",
+      coffeeRating: "4.0",
+    ),
+
+    //black coffee
+    Drink(
+      coffeeImagePath: "lib/images/coffee6.jpg",
+      coffeeType: "Black Coffee",
+      coffeePrice: "\$ 4.30",
       milkType: " ",
       coffeeRating: "4.0",
     ),
