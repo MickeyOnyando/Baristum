@@ -1,13 +1,16 @@
 import 'package:coffeeui/components/bottom_nav_bar.dart';
-import 'package:coffeeui/pages/coffee_tiles.dart';
-import 'package:coffeeui/pages/coffee_type.dart';
-import 'package:coffeeui/pages/specials_tiles.dart';
-import 'package:coffeeui/pages/tiles/cappuccino_page.dart';
+import 'package:coffeeui/models/drinks.dart';
+import 'package:coffeeui/models/shop.dart';
+import 'package:coffeeui/components/coffee_tiles.dart';
+import 'package:coffeeui/components/coffee_type.dart';
+import 'package:coffeeui/components/specials_tiles.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 import 'cart_page.dart';
 import 'shop_page.dart';
+import 'tiles/cappuccino_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -83,11 +86,13 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      bottomNavigationBar: const MyBottomNavBar(),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+      bottomNavigationBar: MyBottomNavBar(
+        onTabChange: (index) => navigateBottomBar(index),
+      ),
+      body: Consumer<CoffeeShop>(
+        builder: (context, value, child) => SingleChildScrollView(
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Text(
@@ -136,115 +141,32 @@ class _HomePageState extends State<HomePage> {
             ),
             SizedBox(
               height: 235,
-              child: ListView(
+              child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                children: [
-                  CoffeeTile(
-                    coffeeImagePath: 'lib/images/coffee10.jpeg',
-                    coffeeType: 'Cappuccino',
-                    milkType: 'With Almond Milk',
-                    coffeePrice: '\$ 4.45',
-                    coffeeRating: '4.0',
-                    onTap: (() {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const CappuccinoPage(),
+                itemCount: value.shop.length,
+                itemBuilder: (context, index) {
+                  //Get drinks from shop
+                  Drink drink = value.shop[index];
+                  //return list tiles of drinks
+                  return SizedBox(
+                    height: 230,
+                    child: Row(
+                      children: [
+                        CoffeeTile(
+                          drink: drink,
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const CappuccinoPage(),
+                              ),
+                            );
+                          },
                         ),
-                      );
-                    }),
-                  ),
-                  CoffeeTile(
-                    coffeeImagePath: 'lib/images/coffee9.jpg',
-                    coffeeType: 'Black Coffee',
-                    milkType: '',
-                    coffeePrice: '\$ 3.00',
-                    coffeeRating: '4.3',
-                    onTap: (() {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const CappuccinoPage(),
-                        ),
-                      );
-                    }),
-                  ),
-                  CoffeeTile(
-                    coffeeImagePath: 'lib/images/coffee6.jpg',
-                    coffeeType: 'Black Coffee',
-                    milkType: '',
-                    coffeePrice: '\$ 3.00',
-                    coffeeRating: '4.0',
-                    onTap: (() {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const CappuccinoPage(),
-                        ),
-                      );
-                    }),
-                  ),
-                  CoffeeTile(
-                    coffeeImagePath: 'lib/images/coffee5.jpg',
-                    coffeeType: 'Cappuccino',
-                    milkType: 'With Dairy Milk',
-                    coffeePrice: '\$ 4.95',
-                    coffeeRating: '4.1',
-                    onTap: (() {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const CappuccinoPage(),
-                        ),
-                      );
-                    }),
-                  ),
-                  CoffeeTile(
-                    coffeeImagePath: 'lib/images/coffee14.jpeg',
-                    coffeeType: 'Expresso',
-                    milkType: '',
-                    coffeePrice: '\$ 3.95',
-                    coffeeRating: '4.0',
-                    onTap: (() {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const CappuccinoPage(),
-                        ),
-                      );
-                    }),
-                  ),
-                  CoffeeTile(
-                    coffeeImagePath: 'lib/images/coffee12.jpeg',
-                    coffeeType: 'Americano',
-                    milkType: '',
-                    coffeePrice: '\$ 4.50',
-                    coffeeRating: '4.5',
-                    onTap: (() {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const CappuccinoPage(),
-                        ),
-                      );
-                    }),
-                  ),
-                  CoffeeTile(
-                    coffeeImagePath: 'lib/images/coffee4.jpg',
-                    coffeeType: 'Latte',
-                    milkType: 'With Almond Milk',
-                    coffeePrice: '\$ 4.00',
-                    coffeeRating: '4.0',
-                    onTap: (() {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const CappuccinoPage(),
-                        ),
-                      );
-                    }),
-                  ),
-                ],
+                      ],
+                    ),
+                  );
+                },
               ),
             ),
             const SizedBox(height: 20),
@@ -277,7 +199,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-          ],
+          ]),
         ),
       ),
     );

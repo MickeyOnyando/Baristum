@@ -1,32 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 
 class MyBottomNavBar extends StatelessWidget {
-  const MyBottomNavBar({
-    Key? key,
-  }) : super(key: key);
+  void Function(int)? onTabChange;
+
+  MyBottomNavBar({
+    required this.onTabChange,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      type: BottomNavigationBarType.fixed,
-      backgroundColor: Colors.grey[900],
-      items: const [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: '',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.shop),
-          label: '',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.favorite),
-          label: '',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.notifications),
-          label: '',
-        ),
+    return GNav(
+      onTabChange: (value) => onTabChange!(value),
+      mainAxisAlignment: MainAxisAlignment.center,
+      activeColor: Colors.amber,
+      color: Colors.grey[300],
+      tabs: const [
+        GButton(icon: Icons.home_sharp),
+        GButton(icon: Icons.shop),
+        GButton(icon: Icons.favorite),
       ],
     );
   }

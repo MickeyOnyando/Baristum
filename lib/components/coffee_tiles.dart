@@ -1,20 +1,15 @@
+import 'package:coffeeui/pages/cart_page.dart';
 import 'package:flutter/material.dart';
 
+import '../models/drinks.dart';
+
 class CoffeeTile extends StatelessWidget {
+  final Drink drink;
   final VoidCallback onTap;
-  final String coffeeImagePath;
-  final String coffeeType;
-  final String coffeePrice;
-  final String milkType;
-  final String coffeeRating;
 
   const CoffeeTile({
-    required this.coffeeImagePath,
     required this.onTap,
-    required this.coffeeType,
-    required this.coffeePrice,
-    required this.milkType,
-    required this.coffeeRating,
+    required this.drink,
   });
 
   @override
@@ -42,7 +37,7 @@ class CoffeeTile extends StatelessWidget {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
                         image: DecorationImage(
-                          image: AssetImage(coffeeImagePath),
+                          image: AssetImage(drink.coffeeImagePath),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -65,7 +60,7 @@ class CoffeeTile extends StatelessWidget {
                             color: Colors.amber,
                             size: 18,
                           ),
-                          Text(coffeeRating),
+                          Text(drink.coffeeRating),
                         ],
                       ),
                     ),
@@ -74,12 +69,12 @@ class CoffeeTile extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 8, bottom: 4),
                   child: Text(
-                    coffeeType,
+                    drink.coffeeType,
                     style: const TextStyle(fontSize: 18),
                   ),
                 ),
                 Text(
-                  milkType,
+                  drink.milkType,
                   style: const TextStyle(color: Colors.grey),
                 ),
                 Padding(
@@ -87,15 +82,25 @@ class CoffeeTile extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(coffeePrice),
-                      Container(
-                        height: 30,
-                        width: 30,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          color: Colors.orange,
+                      Text(drink.coffeePrice),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: ((context) => const CartPage()),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          height: 30,
+                          width: 30,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: Colors.orange,
+                          ),
+                          child: const Icon(Icons.add),
                         ),
-                        child: const Icon(Icons.add),
                       ),
                     ],
                   ),
