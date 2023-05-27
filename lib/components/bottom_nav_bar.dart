@@ -1,17 +1,70 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:coffeeui/pages/cart_page.dart';
+import 'package:coffeeui/pages/home_page.dart';
+import 'package:coffeeui/pages/favorites.dart';
 
-class MyBottomNavBar extends StatelessWidget {
-  void Function(int)? onTabChange;
+class MyBottomNavBar extends StatefulWidget {
+  final int selectedIndex;
 
-  MyBottomNavBar({
-    required this.onTabChange,
+  const MyBottomNavBar({
+    super.key,
+    required this.selectedIndex,
   });
+
+  @override
+  State<MyBottomNavBar> createState() => _MyBottomNavBarState();
+}
+
+class _MyBottomNavBarState extends State<MyBottomNavBar> {
+  int _selectedIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedIndex = widget.selectedIndex;
+  }
+
+  void navigateBottomBar(int newIndex) {
+    setState(() {
+      _selectedIndex = newIndex;
+    });
+
+    switch (newIndex) {
+      case 0: //home
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const HomePage(),
+          ),
+        );
+        break;
+
+      case 1: //cart
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const CartPage(),
+          ),
+        );
+        break;
+
+      case 2: //favorites
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const FavoritesPage(),
+          ),
+        );
+        break;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return GNav(
-      onTabChange: (value) => onTabChange!(value),
+      selectedIndex: _selectedIndex,
+      onTabChange: (value) => navigateBottomBar(value),
       mainAxisAlignment: MainAxisAlignment.center,
       activeColor: Colors.amber,
       color: Colors.grey[300],

@@ -15,7 +15,7 @@ class CoffeeShop extends ChangeNotifier {
 
     //expresso
     Drink(
-      coffeeImagePath: "lib/images/coffee12.jpg",
+      coffeeImagePath: "lib/images/coffee12.jpeg",
       coffeeType: "Expresso",
       coffeePrice: "\$ 3.99",
       milkType: "Dairy Milk",
@@ -54,7 +54,7 @@ class CoffeeShop extends ChangeNotifier {
       coffeeImagePath: 'lib/images/coffee3.jpg',
       coffeeType: "Cappuccino",
       coffeePrice: '\$ 4.50',
-      milkType: "Almond Milk",
+      milkType: " ",
       coffeeRating: "4.5",
     ),
 

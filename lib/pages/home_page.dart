@@ -1,15 +1,15 @@
 import 'package:coffeeui/components/bottom_nav_bar.dart';
+import 'package:coffeeui/components/side_nav.dart';
 import 'package:coffeeui/models/drinks.dart';
 import 'package:coffeeui/models/shop.dart';
 import 'package:coffeeui/components/coffee_tiles.dart';
 import 'package:coffeeui/components/coffee_type.dart';
 import 'package:coffeeui/components/specials_tiles.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import 'cart_page.dart';
-import 'shop_page.dart';
+import 'favorites.dart';
 import 'tiles/cappuccino_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -55,17 +55,13 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  int _selectedIndex = 0;
-  void navigateBottomBar(int newIndex) {
-    setState(() {
-      _selectedIndex = newIndex;
-    });
-  }
-
   //list of pages
   final List<Widget> _pages = [
-    //shop page
-    const ShopPage(),
+    //home page
+    const HomePage(),
+
+    //favorites page
+    const FavoritesPage(),
 
     //cart page
     const CartPage(),
@@ -74,11 +70,11 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const SideNav(),
       backgroundColor: Colors.black87,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
-        leading: const Icon(Icons.grid_view_rounded),
         actions: const [
           Padding(
             padding: EdgeInsets.only(right: 15),
@@ -86,18 +82,16 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      bottomNavigationBar: MyBottomNavBar(
-        onTabChange: (index) => navigateBottomBar(index),
-      ),
+      bottomNavigationBar: const MyBottomNavBar(selectedIndex: 0),
       body: Consumer<CoffeeShop>(
         builder: (context, value, child) => SingleChildScrollView(
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
               child: Text(
                 "Find the best coffee for you",
-                style: GoogleFonts.bebasNeue(
+                style: TextStyle(
                   fontSize: 40,
                   fontWeight: FontWeight.bold,
                 ),

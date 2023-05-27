@@ -1,9 +1,9 @@
-import 'package:coffeeui/pages/cart_page.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../models/drinks.dart';
 
-class CoffeeTile extends StatelessWidget {
+class CoffeeTile extends StatefulWidget {
   final Drink drink;
   final VoidCallback onTap;
 
@@ -13,11 +13,20 @@ class CoffeeTile extends StatelessWidget {
   });
 
   @override
+  State<CoffeeTile> createState() => _CoffeeTileState();
+}
+
+class _CoffeeTileState extends State<CoffeeTile> {
+  void addToCart() {
+    Provider.of(context);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 20),
       child: GestureDetector(
-        onTap: onTap,
+        onTap: widget.onTap,
         child: Container(
           width: 175,
           decoration: BoxDecoration(
@@ -37,7 +46,7 @@ class CoffeeTile extends StatelessWidget {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
                         image: DecorationImage(
-                          image: AssetImage(drink.coffeeImagePath),
+                          image: AssetImage(widget.drink.coffeeImagePath),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -60,7 +69,7 @@ class CoffeeTile extends StatelessWidget {
                             color: Colors.amber,
                             size: 18,
                           ),
-                          Text(drink.coffeeRating),
+                          Text(widget.drink.coffeeRating),
                         ],
                       ),
                     ),
@@ -69,12 +78,12 @@ class CoffeeTile extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 8, bottom: 4),
                   child: Text(
-                    drink.coffeeType,
+                    widget.drink.coffeeType,
                     style: const TextStyle(fontSize: 18),
                   ),
                 ),
                 Text(
-                  drink.milkType,
+                  widget.drink.milkType,
                   style: const TextStyle(color: Colors.grey),
                 ),
                 Padding(
@@ -82,16 +91,9 @@ class CoffeeTile extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(drink.coffeePrice),
+                      Text(widget.drink.coffeePrice),
                       GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: ((context) => const CartPage()),
-                            ),
-                          );
-                        },
+                        onTap: addToCart,
                         child: Container(
                           height: 30,
                           width: 30,
