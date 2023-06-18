@@ -1,16 +1,13 @@
 import 'package:coffeeui/components/bottom_nav_bar.dart';
 import 'package:coffeeui/components/side_nav.dart';
 import 'package:coffeeui/models/drinks.dart';
+import 'package:coffeeui/models/drinks_page.dart';
 import 'package:coffeeui/models/shop.dart';
 import 'package:coffeeui/components/coffee_tiles.dart';
 import 'package:coffeeui/components/coffee_type.dart';
 import 'package:coffeeui/components/specials_tiles.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import 'cart_page.dart';
-import 'favorites.dart';
-import 'tiles/cappuccino_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -55,18 +52,6 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  //list of pages
-  final List<Widget> _pages = [
-    //home page
-    const HomePage(),
-
-    //favorites page
-    const FavoritesPage(),
-
-    //cart page
-    const CartPage(),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -106,12 +91,13 @@ class _HomePageState extends State<HomePage> {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: TextField(
                 decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.grey.shade900,
                   prefixIcon: const Icon(Icons.search),
                   hintText: 'Find your coffee...',
-                  focusedBorder: const OutlineInputBorder(),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(13),
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide.none,
+                    borderRadius: BorderRadius.circular(14),
                   ),
                 ),
               ),
@@ -148,11 +134,12 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         CoffeeTile(
                           drink: drink,
+                          icon: const Icon(Icons.add),
                           onTap: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const CappuccinoPage(),
+                                builder: (context) => const DrinksPage(),
                               ),
                             );
                           },
@@ -180,7 +167,7 @@ class _HomePageState extends State<HomePage> {
                 height: 330,
                 color: Colors.transparent,
                 child: ListView(
-                  children: [
+                  children: const [
                     SpecialsTile(
                       imgPath: 'lib/images/coffee7.jpg',
                       specialsText: '5 Coffee Beans You should Try',

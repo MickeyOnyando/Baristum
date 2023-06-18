@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../models/drinks.dart';
+import '../models/shop.dart';
 
 class CoffeeTile extends StatefulWidget {
   final Drink drink;
+  final Icon icon;
   final VoidCallback onTap;
 
   const CoffeeTile({
+    super.key,
+    required this.icon,
     required this.onTap,
     required this.drink,
   });
@@ -17,8 +21,17 @@ class CoffeeTile extends StatefulWidget {
 }
 
 class _CoffeeTileState extends State<CoffeeTile> {
+  // add to cart function
   void addToCart() {
-    Provider.of(context);
+    Provider.of<CoffeeShop>(context, listen: false).addToCart(widget.drink);
+
+    //lets user know drink has been successfully added
+    showDialog(
+      context: context,
+      builder: (context) => const AlertDialog(
+        title: Text("Successfully added to cart"),
+      ),
+    );
   }
 
   @override
@@ -92,16 +105,16 @@ class _CoffeeTileState extends State<CoffeeTile> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(widget.drink.coffeePrice),
-                      GestureDetector(
-                        onTap: addToCart,
-                        child: Container(
-                          height: 30,
-                          width: 30,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            color: Colors.orange,
-                          ),
-                          child: const Icon(Icons.add),
+                      Container(
+                        height: 30,
+                        width: 30,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: Colors.orange,
+                        ),
+                        child: GestureDetector(
+                          onTap: addToCart,
+                          child: widget.icon,
                         ),
                       ),
                     ],

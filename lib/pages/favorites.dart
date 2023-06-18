@@ -13,6 +13,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
+      backgroundColor: Colors.black87,
       body: Center(
         child: Text("Favorites"),
       ),

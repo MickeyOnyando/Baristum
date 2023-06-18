@@ -4,7 +4,8 @@ class SpecialsTile extends StatelessWidget {
   final String imgPath;
   final String specialsText;
 
-  SpecialsTile({
+  const SpecialsTile({
+    super.key,
     required this.imgPath,
     required this.specialsText,
   });

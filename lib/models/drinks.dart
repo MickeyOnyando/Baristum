@@ -4,6 +4,7 @@ class Drink {
   final String coffeePrice;
   final String milkType;
   final String coffeeRating;
+  final String drinkDescription;
 
   Drink({
     required this.coffeeImagePath,
@@ -11,5 +12,6 @@ class Drink {
     required this.coffeePrice,
     required this.milkType,
     required this.coffeeRating,
+    required this.drinkDescription,
   });
 }

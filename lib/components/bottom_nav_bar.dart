@@ -26,13 +26,15 @@ class _MyBottomNavBarState extends State<MyBottomNavBar> {
   }
 
   void navigateBottomBar(int newIndex) {
-    setState(() {
-      _selectedIndex = newIndex;
-    });
+    if (mounted) {
+      setState(() {
+        _selectedIndex = newIndex;
+      });
+    }
 
     switch (newIndex) {
       case 0: //home
-        Navigator.pushReplacement(
+        Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => const HomePage(),
@@ -41,7 +43,7 @@ class _MyBottomNavBarState extends State<MyBottomNavBar> {
         break;
 
       case 1: //cart
-        Navigator.pushReplacement(
+        Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => const CartPage(),
@@ -50,7 +52,7 @@ class _MyBottomNavBarState extends State<MyBottomNavBar> {
         break;
 
       case 2: //favorites
-        Navigator.pushReplacement(
+        Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => const FavoritesPage(),
