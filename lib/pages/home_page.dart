@@ -1,7 +1,7 @@
 import 'package:coffeeui/components/bottom_nav_bar.dart';
 import 'package:coffeeui/components/side_nav.dart';
 import 'package:coffeeui/models/drinks.dart';
-import 'package:coffeeui/models/drinks_page.dart';
+import 'package:coffeeui/pages/drinks_page.dart';
 import 'package:coffeeui/models/shop.dart';
 import 'package:coffeeui/components/coffee_tiles.dart';
 import 'package:coffeeui/components/coffee_type.dart';
