@@ -44,12 +44,26 @@ class _HomePageState extends State<HomePage> {
 
   //selected coffee type method
   void coffeeTypeSelected(int index) {
-    setState(() {
-      for (int i = 0; i < coffeeType.length; i++) {
-        coffeeType[i][1] = false;
-      }
-      coffeeType[index][1] = true;
-    });
+    setState(
+      () {
+        for (int i = 0; i < coffeeType.length; i++) {
+          coffeeType[i][1] = false;
+        }
+        coffeeType[index][1] = true;
+      },
+    );
+  }
+
+  void addToCart(Drink drink) {
+    Provider.of<CoffeeShop>(context, listen: false).addToCart(drink);
+
+    //lets user know drink has been successfully added
+    showDialog(
+      context: context,
+      builder: (context) => const AlertDialog(
+        title: Text("Successfully added to cart"),
+      ),
+    );
   }
 
   @override
@@ -133,13 +147,14 @@ class _HomePageState extends State<HomePage> {
                     child: Row(
                       children: [
                         CoffeeTile(
+                          onIconTap: () => addToCart(drink),
                           drink: drink,
                           icon: const Icon(Icons.add),
                           onTap: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const DrinksPage(),
+                                builder: (context) => DrinksPage(drink: drink),
                               ),
                             );
                           },

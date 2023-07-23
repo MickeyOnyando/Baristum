@@ -12,9 +12,7 @@ class CoffeeShop extends ChangeNotifier {
       milkType: "Almond Milk",
       coffeeRating: "4.5",
       drinkDescription:
-          """Americano is a type of coffee drink prepared by diluting an 
-      expresso with hot water, giving it a different flavor from traditionally brewed
-      coffee.""",
+          "Americano is a type of coffee drink prepared by diluting an expresso with hot water, giving it a different flavor from traditionally brewed coffee.",
     ),
 
     //expresso
@@ -25,9 +23,7 @@ class CoffeeShop extends ChangeNotifier {
       milkType: "Dairy Milk",
       coffeeRating: "4.0",
       drinkDescription:
-          """Americano is a type of coffee drink prepared by diluting an 
-      expresso with hot water, giving it a different flavor from traditionally brewed
-      coffee.""",
+          "Americano is a type of coffee drink prepared by diluting an expresso with hot water, giving it a different flavor from traditionally brewed coffee.",
     ),
 
     //latte
@@ -38,9 +34,7 @@ class CoffeeShop extends ChangeNotifier {
       milkType: "Dairy Milk",
       coffeeRating: "4.0",
       drinkDescription:
-          """Americano is a type of coffee drink prepared by diluting an 
-      expresso with hot water, giving it a different flavor from traditionally brewed
-      coffee.""",
+          "Americano is a type of coffee drink prepared by diluting an expresso with hot water, giving it a different flavor from traditionally brewed coffee.",
     ),
 
     //Americano
@@ -51,9 +45,7 @@ class CoffeeShop extends ChangeNotifier {
       milkType: " ",
       coffeeRating: "4.0",
       drinkDescription:
-          """Americano is a type of coffee drink prepared by diluting an 
-      expresso with hot water, giving it a different flavor from traditionally brewed
-      coffee.""",
+          "Americano is a type of coffee drink prepared by diluting an expresso with hot water, giving it a different flavor from traditionally brewed coffee.",
     ),
 
     //black coffee
@@ -64,9 +56,7 @@ class CoffeeShop extends ChangeNotifier {
       milkType: " ",
       coffeeRating: "4.0",
       drinkDescription:
-          """Americano is a type of coffee drink prepared by diluting an 
-      expresso with hot water, giving it a different flavor from traditionally brewed
-      coffee.""",
+          "Americano is a type of coffee drink prepared by diluting an expresso with hot water, giving it a different flavor from traditionally brewed coffee.",
     ),
 
     //cappuccino
@@ -77,9 +67,7 @@ class CoffeeShop extends ChangeNotifier {
       milkType: " ",
       coffeeRating: "4.5",
       drinkDescription:
-          """Americano is a type of coffee drink prepared by diluting an 
-      expresso with hot water, giving it a different flavor from traditionally brewed
-      coffee.""",
+          "Americano is a type of coffee drink prepared by diluting an expresso with hot water, giving it a different flavor from traditionally brewed coffee.",
     ),
 
     //latte
@@ -90,9 +78,7 @@ class CoffeeShop extends ChangeNotifier {
       milkType: "Almond Milk",
       coffeeRating: "4.5",
       drinkDescription:
-          """Americano is a type of coffee drink prepared by diluting an 
-      expresso with hot water, giving it a different flavor from traditionally brewed
-      coffee.""",
+          "Americano is a type of coffee drink prepared by diluting an expresso with hot water, giving it a different flavor from traditionally brewed coffee.",
     ),
 
     //Americano
@@ -103,9 +89,7 @@ class CoffeeShop extends ChangeNotifier {
       milkType: " ",
       coffeeRating: "4.0",
       drinkDescription:
-          """Americano is a type of coffee drink prepared by diluting an 
-      expresso with hot water, giving it a different flavor from traditionally brewed
-      coffee.""",
+          "Americano is a type of coffee drink prepared by diluting an expresso with hot water, giving it a different flavor from traditionally brewed coffee.",
     ),
 
     //black coffee
@@ -116,20 +100,24 @@ class CoffeeShop extends ChangeNotifier {
       milkType: " ",
       coffeeRating: "4.0",
       drinkDescription:
-          """Americano is a type of coffee drink prepared by diluting an 
-      expresso with hot water, giving it a different flavor from traditionally brewed
-      coffee.""",
+          "Americano is a type of coffee drink prepared by diluting an expresso with hot water, giving it a different flavor from traditionally brewed coffee.",
     ),
   ];
 
   //list of drinks in users cart
   final List<Drink> _userCart = [];
 
+  //list of drinks in favorites page
+  final List<Drink> _faveDrinks = [];
+
   //get drinks for sale
   List<Drink> get shop => _shop;
 
   //get users cart
   List<Drink> get cart => _userCart;
+
+  //get favorite drinks
+  List<Drink> get fave => _faveDrinks;
 
   //add drinks to cart
   void addToCart(Drink drink) {
@@ -140,6 +128,18 @@ class CoffeeShop extends ChangeNotifier {
   //remove drinks from cart
   void removeFromCart(Drink drink) {
     _userCart.remove(drink);
+    notifyListeners();
+  }
+
+  //add favorite drinks
+  void addFavoriteDrink(Drink drink) {
+    _faveDrinks.add(drink);
+    notifyListeners();
+  }
+
+  //remove favorite drink
+  void removeFavoriteDrink(Drink drink) {
+    _faveDrinks.remove(drink);
     notifyListeners();
   }
 }

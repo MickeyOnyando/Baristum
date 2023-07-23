@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../components/bottom_nav_bar.dart';
 import '../models/drinks.dart';
+import 'drinks_page.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({super.key});
@@ -16,6 +17,22 @@ class CartPage extends StatefulWidget {
 class _CartPageState extends State<CartPage> {
   void removeFromCart(Drink drink) {
     Provider.of<CoffeeShop>(context, listen: false).removeFromCart(drink);
+
+    showDialog(
+      context: context,
+      builder: (context) => const AlertDialog(
+        title: Text("Successfully removed drink from cart"),
+      ),
+    );
+  }
+
+  void buyDrink() {
+    showDialog(
+      context: context,
+      builder: (context) => const AlertDialog(
+        title: Text("Successfully bought drink"),
+      ),
+    );
   }
 
   @override
@@ -50,7 +67,16 @@ class _CartPageState extends State<CartPage> {
                         return Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: CoffeeTile(
-                            onTap: () => removeFromCart(drink),
+                            onIconTap: () => removeFromCart(drink),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      DrinksPage(drink: drink),
+                                ),
+                              );
+                            },
                             drink: drink,
                             icon: const Icon(Icons.delete_rounded),
                           ),
@@ -58,6 +84,11 @@ class _CartPageState extends State<CartPage> {
                       }),
                 ),
                 //pay button
+                MaterialButton(
+                  onPressed: (() => buyDrink),
+                  color: Colors.amber,
+                  child: const Text("Buy Drink"),
+                ),
               ],
             ),
           ),

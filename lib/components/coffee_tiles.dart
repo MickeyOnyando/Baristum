@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../models/drinks.dart';
-import '../models/shop.dart';
 
 class CoffeeTile extends StatefulWidget {
   final Drink drink;
   final Icon icon;
   final VoidCallback onTap;
+  final VoidCallback onIconTap;
 
   const CoffeeTile({
     super.key,
     required this.icon,
     required this.onTap,
     required this.drink,
+    required this.onIconTap,
   });
 
   @override
@@ -22,17 +22,6 @@ class CoffeeTile extends StatefulWidget {
 
 class _CoffeeTileState extends State<CoffeeTile> {
   // add to cart function
-  void addToCart() {
-    Provider.of<CoffeeShop>(context, listen: false).addToCart(widget.drink);
-
-    //lets user know drink has been successfully added
-    showDialog(
-      context: context,
-      builder: (context) => const AlertDialog(
-        title: Text("Successfully added to cart"),
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -113,7 +102,7 @@ class _CoffeeTileState extends State<CoffeeTile> {
                           color: Colors.orange,
                         ),
                         child: GestureDetector(
-                          onTap: addToCart,
+                          onTap: widget.onIconTap,
                           child: widget.icon,
                         ),
                       ),
